@@ -43,6 +43,8 @@ class LCD:
             print('gpio_setup')
         self.gpio.set_mode(self.RS, pigpio.OUTPUT)
         self.gpio.set_mode(self.E, pigpio.OUTPUT)
+#         self.gpio.set_PWM_dutycycle(self.E, 10)
+#         self.gpio.set_mode(self.E, pigpio.OUTPUT)
         for DB in self.DB:
             self.gpio.set_mode(DB, pigpio.OUTPUT)
         self.gpio_cleanup()         
@@ -70,17 +72,11 @@ class LCD:
         # interface 8 bit long
         inst = int( (1 << 5) | (1 << 4) )       
         for k in range(0,3):
-            if self.verbose:
-                print('function_set: {}'.format(k) )
             self._write_8b(inst, RS=0)
             time.sleep(0.01)
         # interface 4 bit long
         inst = int( (1 << 5) | (self.data_length << 4) | (self.display_lines << 3) | (self.rich_font << 2) )
-        if self.verbose:
-            print('function_set: 3')
-        self._write_8b(inst , RS=0)
-        if self.verbose:
-            print('function_set: 4')
+        self._write_8b(inst, RS=0)
         self._write_4b(inst, RS=0)
     
     def display_off(self):
@@ -137,6 +133,12 @@ class LCD:
         # instruction
         inst = int( (1 << 4) | (1 << 3) | (direction << 2) )
         self._write_4b(inst, RS=0)
+        
+#     def display_rotate(self):
+#         self.display_shift('left')
+#         self.gpio.set_PWM_frequency(self.E, 10)
+#         self.gpio.set_PWM_dutycycle(self.E, 64)
+#         print(self.gpio.get_PWM_frequency(self.E))
         
     def _shift(self, direction):
         # direction

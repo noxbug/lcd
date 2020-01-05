@@ -12,7 +12,7 @@ def get_weather_data():
     for match in re.finditer(r'(\S+?)=\"(.+?)\"',keyVal):
         weatherData[match.group(1)] = match.group(2)
     return(weatherData)
-    
+
 # main loop
 weatherData = get_weather_data()
 lcd = LCD()
@@ -22,4 +22,4 @@ lcd.jump_line(2)
 tempStr = weatherData['temp'] + 'ßC'
 windStr = weatherData['windAmount'] + weatherData['windUnit'] + ' ' + weatherData['windDirectionTxt']
 weatherStr = tempStr + ' '*(20-len(tempStr)-len(windStr)) + windStr
-lcd.write(weatherStr)    
+lcd.write(weatherStr)
