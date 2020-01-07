@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.py.swp
+
+# confidential
+whitelist
+credentials
 
 # C extensions
 *.so
