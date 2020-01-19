@@ -4,13 +4,6 @@ import email
 import imaplib
 import subprocess
 
-# %% custom exception class
-#class SenderNotTrustedError(Exception):
-#    pass
-#
-#class NoAttachmentError(Exception):
-#    pass
-
 # %% get path of current file
 dirname = os.path.dirname(os.path.abspath(__file__))
 
